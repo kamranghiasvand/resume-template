@@ -118,6 +118,7 @@ section.name .section-title {
   padding: 0 0 10px 48px;
   line-height: 45px;
   font-size: 45px;
+  width: 100%;
   background: rgb(247, 202, 52,0.9);
   
   
@@ -258,3 +259,10 @@ section.interest .section-body{
   size: auto;
   margin: 10px;
 }
+
+@media print{
+  .container {
+    max-width: 100%;
+    background: var(--white);
+  }
+} 
