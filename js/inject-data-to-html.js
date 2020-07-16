@@ -4,7 +4,8 @@ function load_data() {
     document.getElementById('photo-holder').setAttribute('src', data.photo_path);
     set_person_info();
     set_education();
-
+    set_langs();
+    set_summary();
 }
 
 function set_person_info() {
@@ -27,27 +28,58 @@ function set_person_info() {
 function set_education() {
     education_body = document.querySelector('.education .section-body');
     for (var i in data.education) {
-        var item=data.education[i];
-        education_body.appendChild(create_education_element(item.title,item.body));
+        var item = data.education[i];
+        education_body.appendChild(create_education_element(item.title, item.body));
     }
 }
 
 function create_education_element(title, body) {
     var item = document.createElement('div');
-    item.className='section-item';
+    item.className = 'section-item';
 
     var item_title = document.createElement('div');
-    item_title.className='item-title';
+    item_title.className = 'item-title';
     item_title.innerText = title;
     item.appendChild(item_title);
 
     var item_body = document.createElement('div');
-    item_body.className='item-body';
+    item_body.className = 'item-body';
     item_body.innerText = body;
     item.appendChild(item_body);
 
     return item;
 }
 
+function set_langs() {
+    var language_body = document.querySelector('.language .section-body');
+    for (var i in data.langs) {
+        var lang = data.langs[i];
+        language_body.appendChild(create_language_el(lang.name, lang.expertise));
+    }
+}
+
+function create_language_el(name, expertise) {
+    var item = document.createElement('div');
+    item.className = 'section-item';
+
+    var title = document.createElement('div');
+    title.className = 'item-title';
+    title.innerText = name;
+    item.appendChild(title);
+
+    var progress = document.createElement('progress');
+    progress.max = 100;
+    progress.value = expertise;
+    item.appendChild(progress);
+
+    return item;
+}
+
+function set_summary() {
+    var summary_body = document.querySelector('.summary .section-body');
+    var paragraph = document.createElement('p');
+    paragraph.innerText = data.summary;
+    summary_body.appendChild(paragraph);
+}
 
 load_data();
