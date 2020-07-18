@@ -1,29 +1,40 @@
 {
-    "name": "resume-template",
-    "version": "1.0.0",
-    "description": "creative resume template for programmers",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/kamranghiasvand/resume-template.git"
-    },
-    "keywords": [
-        "Resume",
-        "Template",
-        "Creative",
-        "HTML",
-        "CSS"
-    ],
-    "author": "Kamran Ghiasvand",
-    "license": "MIT License",
-    "bugs": {
-        "url": "https://github.com/kamranghiasvand/resume-template/issues"
-    },
-    "homepage": "https://github.com/kamranghiasvand/resume-template#readme",
-    "dependencies": {
-        "grunt": "^1.2.1"
-    }
+  "name": "resume-template",
+  "version": "1.0.0",
+  "description": "creative resume template for programmers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamranghiasvand/resume-template.git"
+  },
+  "keywords": [
+    "Resume",
+    "Template",
+    "Creative",
+    "HTML",
+    "CSS"
+  ],
+  "author": "Kamran Ghiasvand",
+  "license": "MIT License",
+  "bugs": {
+    "url": "https://github.com/kamranghiasvand/resume-template/issues"
+  },
+  "homepage": "https://github.com/kamranghiasvand/resume-template#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^1.2.1",
+    "grunt-contrib-compass": "^1.1.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-contrib-qunit": "^4.0.0",
+    "grunt-contrib-uglify": "^5.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-filerev": "^2.3.1",
+    "grunt-usemin": "^3.1.1",
+    "matchdep": "^2.0.0"
+  }
 }
