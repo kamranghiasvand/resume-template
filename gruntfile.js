@@ -79,8 +79,21 @@ module.exports = function (grunt) {
       files: ["test/**/*.html"],
     },
     watch: {
-      files: ["<%= jshint.files %>"],
-      tasks: ["jshint", "qunit"],
+      html: {
+        files: "src/**/*.html",
+        tasks: ["copy", "replace"],
+      },
+    },
+    browserSync: {
+      dev: {
+        bsFiles: {
+          src: ["dist/**/*"],
+        },
+        options: {
+          watchTask: true,
+          server: "./dist",
+        },
+      },
     },
   });
 
@@ -93,6 +106,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-clean");
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-text-replace");
+  grunt.loadNpmTasks("grunt-browser-sync");
 
   grunt.registerTask("test", ["clean", "jshint", "copy", "qunit"]);
   grunt.registerTask("default", [
@@ -111,6 +125,7 @@ module.exports = function (grunt) {
     "uglify",
     "copy",
     "replace",
+    "browserSync",
     "watch",
   ]);
 };
