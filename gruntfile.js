@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
+    clean: {
+      dist: ["dist/"],
+    },
     jshint: {
       files: ["gruntfile.js", "src/**/*.js", "test/**/*.js"],
       options: {
@@ -36,6 +39,42 @@ module.exports = function (grunt) {
         },
       },
     },
+    copy: {
+      main: {
+        files: [
+          {
+            expand: true,
+            cwd: "src/",
+            src: "**/*.html",
+            dest: "dist/",
+            filter: "isFile",
+          },
+          {
+            expand: true,
+            cwd: "src/",
+            src: "pic/*",
+            dest: "dist/",
+            filter: "isFile",
+          },
+        ],
+      },
+    },
+    replace: {
+      jsLink: {
+        src: ["dist/index.html"],
+        overwrite: true,
+        replacements: [
+          {
+            from: "./js/inject-data-to-html.js",
+            to: "<%= pkg.name + '-' + pkg.version %>.min.js",
+          },
+          {
+            from: "./data.js",
+            to: "",
+          },
+        ],
+      },
+    },
     qunit: {
       files: ["test/**/*.html"],
     },
@@ -50,8 +89,28 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-uglify");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-contrib-qunit");
+  grunt.loadNpmTasks("grunt-contrib-htmlmin");
+  grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks("grunt-contrib-copy");
+  grunt.loadNpmTasks("grunt-text-replace");
 
-  grunt.registerTask("test", ["jshint", "qunit"]);
-  grunt.registerTask("default", ["jshint", "qunit", "concat", "uglify"]);
-  grunt.registerTask("run", ["jshint", "concat", "uglify", "watch"]);
+  grunt.registerTask("test", ["clean", "jshint", "copy", "qunit"]);
+  grunt.registerTask("default", [
+    "clean",
+    "jshint",
+    "qunit",
+    "concat",
+    "uglify",
+    "copy",
+    "replace",
+  ]);
+  grunt.registerTask("run", [
+    "clean",
+    "jshint",
+    "concat",
+    "uglify",
+    "copy",
+    "replace",
+    "watch",
+  ]);
 };
