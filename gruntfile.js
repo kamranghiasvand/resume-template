@@ -20,7 +20,7 @@ module.exports = function (grunt) {
       },
       dist: {
         src: ["src/**/*.js"],
-        dest: "dist/<%= pkg.name + '-' + pkg.version %>.js",
+        dest: "dist/js/<%= pkg.name + '-' + pkg.version %>.js",
       },
     },
     uglify: {
@@ -33,9 +33,16 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          "dist/<%= pkg.name + '-' + pkg.version %>.min.js": [
+          "dist/js/<%= pkg.name + '-' + pkg.version %>.min.js": [
             "<%= concat.dist.dest %>",
           ],
+        },
+      },
+    },
+    compass: {
+      dev: {
+        options: {
+          config: "config.rb",
         },
       },
     },
@@ -66,7 +73,7 @@ module.exports = function (grunt) {
         replacements: [
           {
             from: "./js/inject-data-to-html.js",
-            to: "<%= pkg.name + '-' + pkg.version %>.min.js",
+            to: "./js/<%= pkg.name + '-' + pkg.version %>.min.js",
           },
           {
             from: "./data.js",
@@ -82,6 +89,14 @@ module.exports = function (grunt) {
       html: {
         files: "src/**/*.html",
         tasks: ["copy", "replace"],
+      },
+      js: {
+        files: "src/**/*.js",
+        tasks: ["concat", "uglify"],
+      },
+      sass: {
+        files: "src/**/*.scss",
+        tasks: ["compass:dev"],
       },
     },
     browserSync: {
@@ -107,6 +122,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-copy");
   grunt.loadNpmTasks("grunt-text-replace");
   grunt.loadNpmTasks("grunt-browser-sync");
+  grunt.loadNpmTasks("grunt-contrib-compass");
 
   grunt.registerTask("test", ["clean", "jshint", "copy", "qunit"]);
   grunt.registerTask("default", [
@@ -116,6 +132,7 @@ module.exports = function (grunt) {
     "concat",
     "uglify",
     "copy",
+    "compass",
     "replace",
   ]);
   grunt.registerTask("run", [
@@ -124,6 +141,7 @@ module.exports = function (grunt) {
     "concat",
     "uglify",
     "copy",
+    "compass",
     "replace",
     "browserSync",
     "watch",
