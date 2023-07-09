@@ -10,7 +10,7 @@ function load_data() {
 
 function set_person_info() {
   info = data.person_info;
-  document.getElementById("person_name").innerText = info.name;
+  document.getElementById("person-name").innerText = info.name;
 
   document
     .getElementById("telephone")
