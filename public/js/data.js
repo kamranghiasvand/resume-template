@@ -1,10 +1,11 @@
 data = {
   photo_path: "./pic/photo.jpg",
   person_info: {
-    name: "Kamran Ghiasvand",
+    first_name: "Kamran",
+    last_name:"Ghiasvand",
     tel: {
-      showing_text: "+98-933-393-8680",
-      value: "+98-933-393-8680",
+      showing_text: "+49-15251346790",
+      value: "+49-15251346790",
     },
     email: {
       showing_text: "Kamran.Ghiasvand@gmail.com",
